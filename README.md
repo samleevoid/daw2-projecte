@@ -1,3 +1,6 @@
 # daw2-projecte
 
-Recordeu que falta el directori 'node_modules' -> el creem amb 'npm i'.
+Recordeu que falta el directori 'node_modules' cal crearlo:
+```
+npm install
+```
