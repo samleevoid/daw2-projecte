@@ -1,4 +1,3 @@
-const { countReset } = require("console");
 const inquirer = require("inquirer");
 require("colors");
 
@@ -78,8 +77,36 @@ const nouAlumne = async (message) => {
   return nom;
 };
 
+const alumneSelect = async (alumnes = []) => {
+  const choices = alumnes.map((alumne, i) => {
+    const idx = `${i + 1}.`.green;
+    return {
+      value: alumne.id,
+      name: `${idx} ${alumne.nom}`,
+    };
+  });
+
+  choices.unshift({
+    value: "0",
+    name: "0. ".green + "Cancel·lar",
+  });
+
+  const pregunta = [
+    {
+      type: "list",
+      name: "id",
+      message: "Selecciona alumne",
+      choices,
+    },
+  ];
+
+  const { id } = await inquirer.prompt(pregunta);
+  return id;
+};
+
 module.exports = {
   inquirerMenu,
   pausa,
   nouAlumne,
+  alumneSelect,
 };

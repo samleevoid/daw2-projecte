@@ -28,6 +28,42 @@ class AlumnesHores {
     const alumne = new Alumne(nom, hores);
     this._llista[alumne.id] = alumne;
   }
+
+  carregarAlumnesFromArray(alumnes = []) {
+    alumnes.forEach((alumne) => {
+      this._llista[alumne.id] = alumne;
+    });
+  }
+
+  llistarAlumnes() {
+    console.log(); // sóc un salt de línia
+
+    let conta = 0;
+    this.llistatArr.forEach((alumne) => {
+      const { nom } = alumne;
+      conta += 1;
+      console.log(`${(conta + ".").green} ${nom}`);
+    });
+  }
+
+  llistarAlumnesHores() {
+    console.log();
+    let conta = 0;
+
+    this.llistatArr.forEach((alumne) => {
+      const { nom, horesFetes } = alumne;
+
+      const hores =
+        horesFetes > 0 ? `${horesFetes}`.green : `${horesFetes}`.red;
+
+      conta += 1;
+      console.log(
+        `${(conta + ".").green} ${"Nom:".yellow} ${(nom + "").cyan} ${
+          "::".green
+        } ${"Hores:".yellow} ${hores}`
+      );
+    });
+  }
 }
 
 module.exports = AlumnesHores;

@@ -1,13 +1,26 @@
 require("colors");
 
-const { inquirerMenu, pausa, nouAlumne } = require("./helpers/inquirer");
-const { guardarDB } = require("./helpers/guardarFitxer");
+const {
+  inquirerMenu,
+  pausa,
+  nouAlumne,
+  alumneSelect,
+} = require("./helpers/inquirer");
+const { guardarDB, readDB } = require("./helpers/guardarFitxer");
 
 const AlumnesHores = require("./models/alumneshores");
+const Alumne = require("./models/alumne");
 
 const main = async () => {
   let opt = "";
   const alumnes = new AlumnesHores();
+
+  const alumnesDB = readDB();
+
+  if (alumnesDB) {
+    // si hi ha dades, carrégales
+    alumnes.carregarAlumnesFromArray(alumnesDB);
+  }
 
   do {
     opt = await inquirerMenu();
@@ -21,12 +34,17 @@ const main = async () => {
         break;
 
       case "2":
+        alumnes.llistarAlumnes();
         break;
 
       case "3":
+        alumnes.llistarAlumnesHores();
         break;
 
       case "4":
+        const id1 = await alumneSelect(alumnes.llistatArr);
+        console.log(id1);
+
         break;
 
       case "5":
