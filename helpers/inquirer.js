@@ -104,9 +104,42 @@ const alumneSelect = async (alumnes = []) => {
   return id;
 };
 
+const introHores = async (message) => {
+  const question = [
+    {
+      type: "input",
+      name: "hores",
+      message,
+      validate(value) {
+        if (value.length === 0) {
+          return "Si us plau, introdueix un número";
+        }
+        return true;
+      },
+    },
+  ];
+
+  const { hores } = await inquirer.prompt(question);
+  return hores;
+};
+
+const confirmar = async (message) => {
+  const question = [
+    {
+      type: "confirm",
+      name: "ok",
+      message,
+    },
+  ];
+
+  const { ok } = await inquirer.prompt(question);
+  return ok;
+};
+
 module.exports = {
   inquirerMenu,
   pausa,
   nouAlumne,
   alumneSelect,
+  introHores,
 };

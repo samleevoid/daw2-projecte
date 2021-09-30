@@ -5,6 +5,7 @@ const {
   pausa,
   nouAlumne,
   alumneSelect,
+  introHores,
 } = require("./helpers/inquirer");
 const { guardarDB, readDB } = require("./helpers/guardarFitxer");
 
@@ -43,11 +44,28 @@ const main = async () => {
 
       case "4":
         const id1 = await alumneSelect(alumnes.llistatArr);
-        console.log(id1);
+
+        if (id1 !== "0") {
+          const hores = await introHores("Hores fetes:");
+          const nomAlumne = await alumnes.introNumHores(id1, hores);
+          console.log(
+            `Alumne: ${nomAlumne} ${"::".yellow} ${hores} hores guardades! `
+          );
+        }
 
         break;
 
       case "5":
+        // eliminar alumne de la base de dades
+
+        // const id2 = ....
+        // if (id2 !== "0") {
+        // const ok -> cridem a confirmar
+        // if( ok ) {
+        //   alumnes.eliminarAlumne(id2);
+        //   console.log('Alumne eliminat!');
+        // }
+        // }
         break;
 
       default:

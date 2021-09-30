@@ -53,6 +53,9 @@ class AlumnesHores {
     this.llistatArr.forEach((alumne) => {
       const { nom, horesFetes } = alumne;
 
+      // la condició 'ternaria' resol el if en una sola línia utilitzant el
+      // format CONDICIÓ ? EXECUTA IF TRUE : EXECUTA IF FALSE
+
       const hores =
         horesFetes > 0 ? `${horesFetes}`.green : `${horesFetes}`.red;
 
@@ -63,6 +66,16 @@ class AlumnesHores {
         } ${"Hores:".yellow} ${hores}`
       );
     });
+  }
+
+  async introNumHores(id, hores) {
+    const alumne = this._llista[id];
+    alumne.horesFetes = hores;
+    return alumne.nom;
+  }
+
+  async eliminarAlumne(id) {
+    delete this._llista[id];
   }
 }
 
