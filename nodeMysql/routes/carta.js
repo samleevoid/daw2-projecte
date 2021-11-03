@@ -35,13 +35,12 @@ const postCarta = (request, response) => {
 app.route("/carta").post(postCarta);
 
 const delCarta = (request, response) => {
-  console.log("entro?");
-  //   const id = request.params.id;
-  //   console.log("el id és", id);
-  //   connection.query("Delete from carta where id = ?", [id], (error, results) => {
-  //     if (error) throw error;
-  //     response.status(201).json({ "Item eliminat!": results.affectedRows });
-  //   });
+  const id = request.params.id;
+  console.log("el id és", id);
+  connection.query("Delete from carta where id = ?", [id], (error, results) => {
+    if (error) throw error;
+    response.status(201).json({ "Item eliminat!": results.affectedRows });
+  });
 };
 
 app.route("/carta/:id").delete(delCarta);
